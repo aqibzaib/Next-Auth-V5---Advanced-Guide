@@ -17,6 +17,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../form-error";
+import { FormSuccess } from "../form-success";
 
 export default function LoginForm() {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -54,7 +55,6 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="password"
@@ -69,6 +69,7 @@ export default function LoginForm() {
               )}
             />
             <FormError message="Something went wrong!" />
+            <FormSuccess message="Email sent!" />
             <Button type="submit" className="w-full">
               Login
             </Button>

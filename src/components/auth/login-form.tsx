@@ -81,7 +81,7 @@ export default function LoginForm() {
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="••••••••"
+                      placeholder="*****"
                       disabled={isPending}
                       {...field}
                     />

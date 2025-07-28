@@ -1,10 +1,9 @@
-import LoginForm from "@/components/auth/login-form";
-import React from "react";
+import RegistrationForm from "@/components/auth/registration-form";
 
 export default function RegistrationPage() {
   return (
     <div>
-      <LoginForm />
+      <RegistrationForm />
     </div>
   );
 }

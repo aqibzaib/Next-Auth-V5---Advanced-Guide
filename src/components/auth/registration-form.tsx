@@ -18,7 +18,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
-import { login } from "@/actions/login"; // ✅ Use register, not login
+import { register } from "@/actions/register"; // ✅ Use register, not register
 import { useState, useTransition } from "react";
 
 export default function RegistrationForm() {
@@ -35,13 +35,13 @@ export default function RegistrationForm() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      login(data).then((result) => {
-        setError(result.error);
-        setSuccess(result.success);
+      register(values).then((data: any) => {
+        setError(data.error);
+        setSuccess(data.success);
       });
     });
   };
@@ -50,7 +50,7 @@ export default function RegistrationForm() {
     <CardWrapper
       headerLabel="Create an account"
       backButtonLabel="Already have an account?"
-      backButtonHref="/auth/login"
+      backButtonHref="/auth/register"
       showSocial
     >
       <FormProvider {...form}>
@@ -113,7 +113,7 @@ export default function RegistrationForm() {
             <FormSuccess message={success} />
 
             <Button type="submit" className="w-full" disabled={isPending}>
-              Register
+              Create an Account
             </Button>
           </div>
         </form>

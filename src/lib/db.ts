@@ -3,7 +3,6 @@
 import { PrismaClient } from "@prisma/client";
 
 declare global {
-  // Make sure this matches: no `!` or stray `{}` braces
   var prisma: PrismaClient | undefined;
 }
 

@@ -4,7 +4,7 @@ import { hash } from "bcrypt";
 import { prisma } from "../lib/db";
 import * as z from "zod";
 import { RegisterSchema } from "@/schemas";
-import { error } from "console";
+import { findUserByEmail } from "@/utilis/user";
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validatedFields = RegisterSchema.safeParse(values);
   if (!validatedFields.success) {
@@ -13,18 +13,14 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const { name, email, password } = validatedFields.data;
   const hashedPassword = await hash(password, 10);
 
-  const userExist = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
+  const userExist = await findUserByEmail(email);
 
   if (userExist) {
     console.log("user exist==>", userExist);
     return { error: "email already taken" };
   }
 
-  const User = prisma.user.create({
+  await prisma.user.create({
     data: {
       name,
       email,
@@ -33,5 +29,5 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   });
 
   // Send token verification email
-  return { success: "Email sent!" };
+  return { success: "User Created" };
 };

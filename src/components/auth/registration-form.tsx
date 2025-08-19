@@ -50,7 +50,7 @@ export default function RegistrationForm() {
     <CardWrapper
       headerLabel="Create an account"
       backButtonLabel="Already have an account?"
-      backButtonHref="/auth/register"
+      backButtonHref="/auth/login"
       showSocial
     >
       <FormProvider {...form}>
